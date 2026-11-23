@@ -1,0 +1,181 @@
+{
+  "pages": [
+    {
+      "page": 1,
+      "width": 841.91998,
+      "height": 594.95996
+    }
+  ],
+  "fields": {
+    "Company Name": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        39.7,
+        54.0,
+        294.0,
+        75.0
+      ]
+    },
+    "Product Name": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        294.0,
+        54.0,
+        547.5,
+        75.0
+      ]
+    },
+    "BU": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        547.5,
+        54.0,
+        801.7,
+        75.0
+      ]
+    },
+    "Use Case": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        100.5,
+        801.7,
+        141.7
+      ]
+    },
+    "AI Workload": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        141.7,
+        801.7,
+        182.2
+      ]
+    },
+    "Intel Software Stack": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        182.2,
+        801.7,
+        215.2
+      ]
+    },
+    "Model/s": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        215.2,
+        801.7,
+        247.5
+      ]
+    },
+    "Model Optimizations": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        247.5,
+        801.7,
+        280.5
+      ]
+    },
+    "OS": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        280.5,
+        801.7,
+        312.7
+      ]
+    },
+    "Intel Target Hardware": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        607.5,
+        312.7,
+        801.7,
+        345.7
+      ]
+    },
+    "Intel": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        222.7,
+        100.5,
+        406.5,
+        119.2
+      ]
+    },
+    "ISV": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        222.7,
+        119.2,
+        406.5,
+        138.0
+      ]
+    },
+    "CRM": {
+      "page": 1,
+      "placement": "right",
+      "bbox": [
+        222.7,
+        138.0,
+        406.5,
+        156.7
+      ]
+    },
+    "Value Proposition": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        39.7,
+        182.2,
+        406.5,
+        372.0
+      ]
+    },
+    "Performance Metrics": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        39.7,
+        472.5,
+        253.5,
+        546.0
+      ]
+    },
+    "Success Criteria": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        253.5,
+        472.5,
+        588.7,
+        546.0
+      ]
+    },
+    "Dependencies": {
+      "page": 1,
+      "placement": "below",
+      "bbox": [
+        588.7,
+        472.5,
+        801.7,
+        546.0
+      ]
+    }
+  }
+}

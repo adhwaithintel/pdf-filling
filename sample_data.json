@@ -1,0 +1,19 @@
+{
+  "Company Name": "Acme Vision Inc.",
+  "Product Name": "VisionIQ",
+  "BU": "Retail Analytics",
+  "Intel": "Jane Doe (AI ISV Partnerships)",
+  "ISV": "John Smith, CTO",
+  "CRM": "OPP-004521",
+  "Value Proposition": "VisionIQ delivers real-time shelf monitoring for retailers. Optimizing it on Intel hardware lowers per-store inference cost, removes the GPU dependency at the edge, and lets Acme scale to thousands of stores with CPU-only deployments while keeping latency under 50 ms per frame.",
+  "Use Case": "Retail shelf analytics",
+  "AI Workload": "Object detection / computer vision",
+  "Intel Software Stack": "OpenVINO 2025.x, oneDNN, Intel Extension for PyTorch",
+  "Model/s": "YOLOv8m, ResNet-50",
+  "Model Optimizations": "INT8 quantization (NNCF), operator fusion, async inference",
+  "OS": "Ubuntu 22.04 LTS",
+  "Intel Target Hardware": "Xeon 6 (Granite Rapids), Core Ultra 200V",
+  "Performance Metrics": ["Throughput: >= 60 FPS per stream", "P95 latency < 50 ms", "Accuracy drop < 1% mAP"],
+  "Success Criteria": ["INT8 model meets accuracy target on Acme validation set", "2x speedup vs. current FP32 baseline", "Reference deployment on 3 pilot stores", "Joint case study published"],
+  "Dependencies": ["Access to Acme validation dataset", "Xeon 6 system provisioned by Intel", "Acme engineer 0.5 FTE for 6 weeks"]
+}
