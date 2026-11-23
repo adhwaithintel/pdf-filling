@@ -16,6 +16,7 @@ from xml.sax.saxutils import escape
 PAD = 4                      # inner padding of a cell (pt)
 MAX_FONT, MIN_FONT = 10, 5   # auto-shrink range
 FONT = "Helvetica"
+GROUP_HEADERS = {"key contacts", "targeted ai approach"}
 
 
 def to_text(value):
@@ -43,8 +44,26 @@ def fit_paragraph(markup, width, height):
     return p, h, MIN_FONT, False          # did not fit even at MIN_FONT
 
 
-def fill(template, schema_path, data, out_path):
+def normalize(data):
+    """Accept either a flat {field: value} dict or the extraction output
+    {"questionnaire_answers": [{"standard_field", "answer", "needs_review", ...}]}.
+    Returns (flat_values, review_fields)."""
+    if isinstance(data, dict) and "questionnaire_answers" in data:
+        flat, review = {}, set()
+        for item in data["questionnaire_answers"]:
+            field, ans = item.get("standard_field"), item.get("answer")
+            if not field or ans is None or not str(ans).strip():
+                continue                      # skip empty answers
+            flat[field] = ans
+            if item.get("needs_review"):
+                review.add(field.strip().lower())
+        return flat, review
+    return data, set()
+
+
+def fill(template, schema_path, data, out_path, highlight_review=True):
     schema = json.load(open(schema_path))
+    data, review = normalize(data)
     # accept nested groups too: {"Key Contacts": {"Intel": ..}} -> flat
     flat = {}
     for k, v in data.items():
@@ -64,6 +83,8 @@ def fill(template, schema_path, data, out_path):
 
     for key, value in flat.items():
         real = norm.get(key.strip().lower())
+        if real is None and key.strip().lower() in GROUP_HEADERS:
+            continue                          # section titles, no value cell
         if real is None:
             report["missing_in_pdf"].append(key)
             continue
@@ -78,6 +99,10 @@ def fill(template, schema_path, data, out_path):
         if not ok:
             report["overflow"].append(f"{real} (needs {ph:.0f}pt, has {h:.0f}pt)")
         c, _, H = buffers[f["page"]]
+        if highlight_review and real.lower() in review:
+            c.saveState(); c.setFillColorRGB(1, 0.92, 0.35, alpha=0.45)
+            c.rect(x0, H - bottom, x1 - x0, bottom - top, stroke=0, fill=1); c.restoreState()
+            report.setdefault("needs_review", []).append(real)
         # clip so overflowing text can never spill into neighbouring cells
         c.saveState()
         path = c.beginPath(); path.rect(x0, H - bottom, x1 - x0, bottom - top)
@@ -87,6 +112,7 @@ def fill(template, schema_path, data, out_path):
         report["filled"].append(f"{real} @ {size}pt")
 
     # clone the template into the writer first (required by pypdf >= 6/7)
+    report["not_provided"] = [k for k in schema["fields"] if k not in report["filled"] and not any(x.startswith(k + " @") for x in report["filled"])]
     writer = PdfWriter(clone_from=template)
     for i, page in enumerate(writer.pages, 1):
         c, buf, _ = buffers[i]
@@ -99,5 +125,6 @@ def fill(template, schema_path, data, out_path):
 
 if __name__ == "__main__":
     tpl, sch, data_json, out = sys.argv[1:5]
-    rep = fill(tpl, sch, json.load(open(data_json)), out)
+    rep = fill(tpl, sch, json.load(open(data_json)), out,
+               highlight_review="--no-highlight" not in sys.argv)
     print(json.dumps(rep, indent=2))
